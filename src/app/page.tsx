@@ -1,11 +1,35 @@
+// "use client";
 import { Input } from "@/components/ui/input";
+// import { UserInfo } from "@/components/UserInfo";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import { UserInfoSection } from "@/components/UserInfoSection";
+
+// export function UserInfo() {
+//   const { data: session } = useSession();
+
+//   if (!session) {
+//     return (
+//       <button onClick={() => signIn("github")}>Sign in with GitHub</button>
+//     );
+//   }
+
+//   return (
+//     <div>
+//       <p>Signed in as {session.user.name}</p>
+//       <button onClick={() => signOut()}>Sign out</button>
+//     </div>
+//   );
+// }
+
+
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-black text-white p-6 font-mono">
+      <UserInfoSection />
       <div className="max-w-3xl mx-auto">
+      
         <h1 className="text-4xl font-bold mb-8 text-cyan-400 text-center">CodeSourcerer</h1>
 
         <div className="space-y-6">
