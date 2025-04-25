@@ -18,6 +18,11 @@
     --foreground: #ededed;
   }
 }
+/* global.css or tailwind.config.ts -> extend boxShadow */
+.drop-shadow-glow {
+  filter: drop-shadow(0 0 8px #22d3ee);
+}
+
 
 body {
   background: var(--background);

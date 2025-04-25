@@ -1,45 +1,94 @@
-"use client";
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 
-export function FileForm({ handleSubmit }: { handleSubmit: any }) {
+type FileFormProps = {
+  handleSubmit: (type: string, data: File) => void;
+};
+
+export function FileForm({ handleSubmit }: FileFormProps) {
   const [file, setFile] = useState<File | null>(null);
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      setFile(e.target.files[0]);
-    }
+  const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = e.target.files?.[0] || null;
+    setFile(selectedFile);
   };
 
-  const submit = () => {
+  const onSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
     if (file) {
-      // Convert file to Base64 or FormData to send to the backend
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        const fileData = reader.result;
-        handleSubmit("file", fileData); // Send file data to the parent component
-      };
-      reader.readAsDataURL(file); // Convert file to Base64
+      handleSubmit("file", file);
+    } else {
+      alert("Please select a file before submitting.");
     }
   };
 
   return (
-    <div>
-      <Input
-        type="file"
-        accept=".zip,.js,.ts,.py,.txt" // Adjust according to the file types you expect
-        onChange={handleFileChange}
-        className="w-full mt-4"
-      />
-      <Button
-        onClick={submit}
-        className="mt-4 bg-cyan-600 hover:bg-cyan-500"
-        disabled={!file}
+    <form onSubmit={onSubmit} className="space-y-4">
+      <label
+        htmlFor="file-upload"
+        className="inline-block cursor-pointer border border-cyan-400 bg-cyan-900 text-white hover:bg-cyan-700 hover:text-cyan-300 px-4 py-2 rounded-md transition duration-200"
       >
-        Submit File
-      </Button>
-    </div>
+        Browse...
+      </label>
+      <input
+        id="file-upload"
+        type="file"
+        onChange={onFileChange}
+        className="hidden"
+      />
+      {file && (
+        <p className="text-sm text-cyan-300">
+          Selected File: <span className="font-medium">{file.name}</span>
+        </p>
+      )}
+      <Button type="submit" className="bg-cyan-600 hover:bg-cyan-500">Submit</Button>
+    </form>
   );
 }
+
+// "use client";
+
+// import { useState } from "react";
+// import { Button } from "@/components/ui/button";
+
+// type FileFormProps = {
+//   handleSubmit: (data: string) => void;
+// };
+
+// export function FileForm({ handleSubmit }: FileFormProps) {
+//   const [fileData, setFileData] = useState<string>("");
+
+//   const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+//     const file = e.target.files?.[0];
+//     if (file) {
+//       const reader = new FileReader();
+//       reader.onload = () => {
+//         if (typeof reader.result === "string") {
+//           setFileData(reader.result);
+//         }
+//       };
+//       reader.readAsText(file);
+//     }
+//   };
+
+//   const onSubmit = (e: React.FormEvent) => {
+//     e.preventDefault();
+//     if (fileData) {
+//       handleSubmit(fileData);
+//     }
+//   };
+
+//   return (
+//     <form onSubmit={onSubmit} className="space-y-4">
+//       <input
+//         type="file"
+//         accept=".txt,.js,.py,.ts,.java,.rb,.go"
+//         onChange={onFileChange}
+//         className="text-white"
+//       />
+//       <Button type="submit" className="bg-cyan-600 hover:bg-cyan-500">
+//         Submit
+//       </Button>
+//     </form>
+//   );
+// }

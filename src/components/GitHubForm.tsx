@@ -1,15 +1,14 @@
 "use client";
 
-// components/GitHubForm.tsx
-
-// components/GitHubForm.tsx
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
+// type GitHubFormProps = {
+//   handleSubmit: (type: string, data: any) => Promise<void>;
+// };
 type GitHubFormProps = {
-  handleSubmit: (type: string, data: any) => Promise<void>;
+  handleSubmit: (data: string) => void;
 };
 
 export function GitHubForm({ handleSubmit }: GitHubFormProps) {
@@ -17,7 +16,7 @@ export function GitHubForm({ handleSubmit }: GitHubFormProps) {
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    handleSubmit("github", gitRepo);
+    handleSubmit(gitRepo);
   };
 
   return (

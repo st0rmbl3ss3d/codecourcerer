@@ -74,13 +74,17 @@
 // }
 "use client";
 
-import { SubmissionForm } from "@/components/SubmissionForm"; // Adjust the path based on your structure
+import { SubmissionForm } from "@/components/SubmissionForm";
+import { UserInfoSection } from "@/components/UserInfoSection";
+// Adjust the path based on your structure
 
 export default function Page() {
   return (
     <main className="min-h-screen bg-gray-900 text-white p-6">
       <h1 className="text-3xl font-semibold mb-6">Submit Code for Analysis</h1>
-
+      <div>
+      <UserInfoSection />
+      </div>
       {/* Here we are rendering the SubmissionForm component */}
       <SubmissionForm />
     </main>
