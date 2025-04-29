@@ -76,6 +76,9 @@
 
 import { SubmissionForm } from "@/components/SubmissionForm";
 import { UserInfoSection } from "@/components/UserInfoSection";
+import Link from "next/link";
+
+
 // Adjust the path based on your structure
 
 export default function Page() {
@@ -84,7 +87,12 @@ export default function Page() {
       <h1 className="text-3xl font-semibold mb-6">Submit Code for Analysis</h1>
       <div>
       <UserInfoSection />
+      <Link href="/reports" className="text-cyan-400 hover:underline">
+      View Reports
+      </Link>
+
       </div>
+      
       {/* Here we are rendering the SubmissionForm component */}
       <SubmissionForm />
     </main>
